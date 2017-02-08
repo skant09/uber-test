@@ -21,8 +21,7 @@ export class SimpleFormComponent implements OnInit {
   constructor() { }
 
   onSubmit(e) {
-    const movie = new MovieService();
-    console.log('submitted', this.model, movie.getHeroes());
+    console.log('submitted', this.model, MovieService);
     this.submitted = true;
   }
 
