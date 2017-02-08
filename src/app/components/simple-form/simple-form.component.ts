@@ -13,15 +13,17 @@ export class SimpleFormComponent implements OnInit {
   model = {
     city: 'sanfrasisco',
     movie: 'Rings',
-    lat: 51.678418,
-    lng: 7.809007
+    lat: 37.7749,
+    lng: -122.4194
   };
   submitted = false;
 
-  constructor() { }
+  constructor(private movieService: MovieService) {
+  }
 
   onSubmit(e) {
-    console.log('submitted', this.model, MovieService);
+    console.log('submitted');
+    this.movieService.getHeroes().subscribe(res => console.log(res));
     this.submitted = true;
   }
 

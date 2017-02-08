@@ -6,24 +6,28 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Hero } from './mock-heroes';
+declare var jQuery: any;
 
 @Injectable()
 export class MovieService {
-  private heroesUrl = 'https://data.sfgov.org/OData.svc/yitu-d5am';
+  private movieUrl = 'https://data.sfgov.org/OData.svc/yitu-d5am';
 
   constructor(private http: Http) {
   }
 
   public getHeroes(): Observable<Hero[]> {
-    return this.http.get(this.heroesUrl)
+    return this.http.get(this.movieUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   private extractData(res: Response) {
-    const body = res.json();
-    return body.data || {};
+    const parser = new DOMParser();
+    const body = parser.parseFromString(res.text(), 'application/xml');
+    const entries = body.getElementsByTagName('entry');
+    return entries;
   }
+
 
   private handleError(error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
