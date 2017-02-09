@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Hero } from './mock-heroes';
+import { Movie } from './mock-heroes';
 declare var jQuery: any;
 
 @Injectable()
@@ -15,7 +15,7 @@ export class MovieService {
   constructor(private http: Http) {
   }
 
-  public getHeroes(): Observable<Hero[]> {
+  public getMovies(): Observable<Movie[]> {
     return this.http.get(this.movieUrl)
       .map(this.extractData)
       .catch(this.handleError);
@@ -24,8 +24,21 @@ export class MovieService {
   private extractData(res: Response) {
     const parser = new DOMParser();
     const body = parser.parseFromString(res.text(), 'application/xml');
-    const entries = body.getElementsByTagName('entry');
-    return entries;
+    const entries = body.querySelectorAll('entry properties');
+    const movies = [];
+    for (let i = 0; i < entries.length; i++) {
+      const movie = entries[i].getElementsByTagName('title')[0].innerHTML;
+      const author = entries[i].getElementsByTagName('writer')[0].innerHTML;
+      let location = entries[i].getElementsByTagName('locations')[0].innerHTML;
+      location = location ? location : 'NA';
+      const length = Math.max(movies.length - 1, 0);
+      if (movies[length] && movie === movies[length].name) {
+        movies[length]['location'].push(location);
+      } else {
+        movies.push(new Movie(i, movie, [location], author, 37.7749, -122.4195));
+      }
+    }
+    return movies;
   }
 
 
