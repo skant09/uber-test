@@ -1,0 +1,11 @@
+.jiffle {
+  background-image: url('/public/assets/screenshot.jpg');
+  .answer {
+    text-align: center;
+    span {
+      display: inline-block;
+      border: 1px solid #333;
+      min-width: 15%;
+    }
+  }
+}

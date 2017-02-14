@@ -1,0 +1,14 @@
+<nav>
+  <a routerLink="/main" routerLinkActive="active">Main</a>
+  <a routerLink="/jiffleNow" routerLinkActive="active">Jiffle Now</a>
+  <a routerLink="/uber" routerLinkActive="active">Uber</a>
+</nav>
+<h1 class="col-sm-12 text-center">
+  {{title}}
+</h1>
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
+<!-- Routed views go here -->

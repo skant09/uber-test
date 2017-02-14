@@ -1,0 +1,22 @@
+<div class="jiffle text-left" *ngIf="selectedQuestion && !submit">
+  <p>Q. {{selectedQuestion.text}}</p>
+  <p *ngFor="let option of selectedQuestion.options; let i = index" class="text-left">
+    {{i | number2Alphabet}}. {{selectedQuestion.options[i]}}
+  </p>
+  <p class="answer box">
+    <span (click)="selectAnswer(1)">A</span>
+    <span (click)="selectAnswer(2)">B</span>
+    <span (click)="selectAnswer(3)">C</span>
+    <span (click)="selectAnswer(4)">D</span>
+  </p>
+</div>
+
+<div class="jiffle text-left" *ngIf="submit">
+  <div *ngFor="let question of questionCollection; let i = index" class="text-left">
+    <p>Q. {{question.text}}</p>
+    <!-- {{i | number2Alphabet}}. {{selectedQuestion.options[i]}} -->
+    <p>
+      <span>Selected answer: {{question.answerSubmitted | number2Alphabet}}</span>
+      <span>Correcct answer: {{question.answer | number2Alphabet}}</span>
+  </div>
+</div>

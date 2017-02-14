@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MovieService } from '../../service/movie.service';
-import { Movie } from '../../service/mock-heroes';
+import { MovieService } from '../../service/movies/movie.service';
+import { Movie } from '../../service/movies/mock-heroes';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+
 @Component({
   selector: 'app-simple-form',
   templateUrl: './simple-form.component.html',
@@ -39,6 +40,7 @@ export class SimpleFormComponent implements OnInit {
     this.movieService.getMovies().subscribe(res => {
       this.movieCollection = res;
     });
+    console.log('simple form');
     // this.select.emit(this.selectedMovie);
   }
 }

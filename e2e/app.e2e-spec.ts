@@ -1,10 +1,10 @@
-import { UberTestPage } from './app.po';
+import { MigrationProjectPage } from './app.po';
 
-describe('uber-test App', function() {
-  let page: UberTestPage;
+describe('migration-project App', function() {
+  let page: MigrationProjectPage;
 
   beforeEach(() => {
-    page = new UberTestPage();
+    page = new MigrationProjectPage();
   });
 
   it('should display message saying app works', () => {
